@@ -1,48 +1,34 @@
 #!/bin/bash
 function coloredEcho(){
-    local exp=$1;
-    local color=$2;
-    if ! [[ $color =~ '^[0-9]$' ]] ; then
-       case $(echo $color | tr '[:upper:]' '[:lower:]') in
-        black) color=0 ;;
-        red) color=1 ;;
-        green) color=2 ;;
-        yellow) color=3 ;;
-        blue) color=4 ;;
-        magenta) color=5 ;;
-        cyan) color=6 ;;
-        white|*) color=7 ;; # white or invalid color
-       esac
-    fi
-    tput setaf $color;
-    echo $exp;
+    tput setaf $2;
+    echo $1;
     tput sgr0;
 }
 
 if [ "$(uname)" != "Darwin" ]; then
-  coloredEcho "sorry! this script only supports macos" red
+  coloredEcho "sorry! this script only supports macos" 1
   exit 1
 fi
 
 if [ "$(command -v brew)" == "" ]; then
-    coloredEcho "installing hombrew" green
+    coloredEcho "installing hombrew" 2
     NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
-  coloredEcho "homebrew already installed" blue
+  coloredEcho "homebrew already installed" 4
 fi
 
 if [ "$(brew ls --versions tmux)" == "" ]; then
-  coloredEcho "installing tmux" green
+  coloredEcho "installing tmux" 2
   brew install tmux
 else
-  coloredEcho "tmux already installed" blue
+  coloredEcho "tmux already installed" 4
 fi
 
 tpm_directory="$HOME/.config/tmux/plugins/tpm"
 if [ ! -d "$tpm_directory" ]; then
-  coloredEcho "installing tpm" green
+  coloredEcho "installing tpm" 2
   git clone https://github.com/tmux-plugins/tpm $tpm_directory
   "$tpm_directory/bin/install_plugins"
 else
-  coloredEcho "packer already installed" blue
+  coloredEcho "packer already installed" 4
 fi
