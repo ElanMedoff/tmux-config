@@ -28,7 +28,9 @@ tpm_directory="$HOME/.config/tmux/plugins/tpm"
 if [ ! -d "$tpm_directory" ]; then
   cecho "installing tpm" 2
   git clone https://github.com/tmux-plugins/tpm $tpm_directory
-  "$tpm_directory/bin/install_plugins"
 else
-  cecho "packer already installed" 4
+  cecho "tpm already installed" 4
 fi
+
+cecho "installing tpm plugins" 2
+"$tpm_directory/bin/install_plugins"
