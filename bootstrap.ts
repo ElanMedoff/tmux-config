@@ -11,13 +11,15 @@ await maybeInstallPackage("tmux");
 const tpmDir = path.join(os.homedir(), ".config/tmux/plugins/tpm/");
 
 if (fs.existsSync(tpmDir)) {
-  console.log(chalk.green("tpm already installed"));
+  console.log(chalk.blue("tpm already installed"));
 } else {
-  console.log(chalk.blue("installing tpm "));
-  await spinner(() =>
-    $`git clone https://github.com/tmux-plugins/tpm ${tpmDir}`
+  await spinner(
+    chalk.green("installing tpm "),
+    () => $`git clone https://github.com/tmux-plugins/tpm ${tpmDir}`,
   );
 }
 
-console.log(chalk.blue("installing tpm plugins"));
-await spinner(() => $`${path.join(tpmDir, "bin/install_plugins")}`);
+await spinner(
+  chalk.green("installing tpm plugins"),
+  () => $`${path.join(tpmDir, "bin/install_plugins")}`,
+);
