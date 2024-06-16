@@ -1,14 +1,12 @@
 import "npm:zx/globals";
 import { $ } from "npm:zx";
-import { hasHomebrew, maybeInstallPackage } from "../../../helpers.ts";
+import { installPackage } from "../../../helpers.ts";
 
-const hasBrew = await hasHomebrew();
-if (!hasBrew) {
-  await $`exit`;
-}
-
-await maybeInstallPackage("tmux");
-const tpmDir = path.join(os.homedir(), ".config/tmux/plugins/tpm/");
+await installPackage({
+  packageName: "tmux",
+  packageManager: argv.pm,
+});
+const tpmDir = path.join(os.homedir(), ".tmux/plugins/tpm/");
 
 if (fs.existsSync(tpmDir)) {
   console.log(chalk.blue("tpm already installed"));
