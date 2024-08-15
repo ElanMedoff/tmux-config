@@ -13,6 +13,7 @@ then
 else
   h_cecho --doing "cloning tpm"
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm/
-  h_cecho --doing "installing tpm plugins"
-  ~/.tmux/plugins/tpm/bin/install_plugins
 fi
+
+h_cecho --doing "installing tpm plugins"
+~/.tmux/plugins/tpm/bin/install_plugins
