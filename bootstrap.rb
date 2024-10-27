@@ -12,7 +12,7 @@ if Dir.exist? tpm_dir
   puts 'tpm already installed'.noop
 else
   puts 'cloning tpm'.doing
-  `git clone "https://github.com/tmux-plugins/tpm" #{tpm_dir}`
+  stream_command "git clone https://github.com/tmux-plugins/tpm #{tpm_dir}"
 end
 
 puts 'installing tpm plugins'.doing
